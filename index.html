@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espace Peinture — BTP CFA AUBE</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--jaune:#E8A000;--jaune-hover:#C88000;--bleu:#2C5F8A;--gris:#6B7280;--t:#1A1A2E;--t2:#6B7280;--b:#E5E7EB}
+body{font-family:'Inter',sans-serif;background:#f0f0f0;min-height:100vh}
+
+/* ===== LOGIN ===== */
+#SL{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;
+  position:relative;overflow:hidden;
+  background:linear-gradient(rgba(220,228,235,0.6),rgba(220,228,235,0.6));
+}
+.hero-svg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+
+.login-wrap{position:relative;z-index:2;width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center}
+.login-logo-above{margin-bottom:-28px;z-index:3;position:relative}
+.login-logo-circle{width:84px;height:84px;background:#F5C800;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid #2C5F8A;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.logo-btp{font-family:'Oswald',sans-serif;font-size:7px;font-weight:700;color:#0C2D4A;letter-spacing:.4px;line-height:1}
+.logo-aube{font-family:'Oswald',sans-serif;font-size:11px;font-weight:700;color:#0C2D4A;letter-spacing:.3px;line-height:1}
+.logo-site{font-family:'Inter',sans-serif;font-size:5.5px;color:#0C2D4A;opacity:.65;margin-top:1px}
+
+.login-card{background:#fff;border-radius:16px;padding:2.25rem 1.75rem 1.75rem;width:100%;box-shadow:0 8px 32px rgba(0,0,0,.18)}
+.login-title{font-family:'Oswald',sans-serif;font-size:19px;font-weight:700;color:#1A1A2E;text-align:center;margin-bottom:2px}
+.login-sub{font-size:12px;color:#6B7280;text-align:center;margin-bottom:1.4rem}
+
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
+.pb{background:#F9FAFB;border:1.5px solid #E5E7EB;border-radius:10px;padding:.75rem .5rem;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;text-align:center}
+.pb:hover{border-color:#2C5F8A;background:#EFF6FF}
+.pb.sel{border:2px solid #2C5F8A;background:#EFF6FF}
+.pb .pl{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:#1A1A2E;display:block}
+.pb .ps{font-size:10px;color:#6B7280;margin-top:2px;display:block}
+
+.code-label{font-family:'Oswald',sans-serif;font-size:11px;color:#9CA3AF;text-align:center;letter-spacing:2px;margin-bottom:6px;text-transform:uppercase}
+input.code{width:100%;background:#F9FAFB;border:1.5px solid #E5E7EB;border-radius:8px;padding:11px 12px;font-size:16px;font-family:'Oswald',sans-serif;color:#1A1A2E;letter-spacing:4px;text-align:center;margin-bottom:.75rem}
+input.code::placeholder{color:#C4CDD6;letter-spacing:1px;font-size:13px}
+input.code:focus{outline:none;border-color:#2C5F8A;background:#fff}
+
+.btnp{width:100%;padding:14px;background:#E8A000;border:none;border-radius:10px;font-family:'Oswald',sans-serif;font-size:17px;font-weight:700;color:#fff;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;box-shadow:0 2px 8px rgba(232,160,0,.3)}
+.btnp:hover{background:#C88000}
+.err{font-size:12px;color:#DC2626;margin-top:8px;min-height:16px;text-align:center}
+
+/* ===== TOPBAR ===== */
+.topbar{background:#2C5F8A;padding:12px 1.25rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.tbl{display:flex;align-items:center;gap:10px}
+.tlogo-sm{width:34px;height:34px;background:#F5C800;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;border:2px solid #fff}
+.tlogo-sm-btp{font-family:'Oswald',sans-serif;font-size:5.5px;font-weight:700;color:#0C2D4A;line-height:1;letter-spacing:.2px}
+.tlogo-sm-aube{font-family:'Oswald',sans-serif;font-size:8.5px;font-weight:700;color:#0C2D4A;line-height:1}
+.ttitle{font-family:'Oswald',sans-serif;font-size:15px;font-weight:500;color:#fff}
+.tsub{font-size:10px;color:rgba(255,255,255,.65);margin-top:1px}
+.bout{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:5px 10px;font-size:11px;color:#fff;cursor:pointer;font-family:'Inter',sans-serif}
+.bout:hover{background:rgba(255,255,255,.25)}
+
+/* ===== PAGES ===== */
+#SD,#SC,#SG,#SA{display:none}
+.dash{padding:1.1rem;max-width:700px;margin:0 auto}
+
+.cbar{background:#fff;border:1px solid var(--b);border-radius:10px;padding:.85rem 1rem;margin-bottom:1rem}
+.cbar-lbl{font-size:11px;color:var(--t2);margin-bottom:6px}
+.csteps{display:flex;gap:3px}
+.cs{flex:1;height:7px;border-radius:3px;background:#E5E7EB;transition:background .3s}
+.cs.done{background:#2C5F8A}.cs.cur{background:#E8A000}
+.cbar-ft{display:flex;justify-content:space-between;margin-top:5px}
+.cbar-ft span{font-size:11px;color:var(--t2)}.cbar-ft strong{font-size:11px;color:#15803D;font-weight:500}
+
+.stitle{font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;color:var(--t);margin-bottom:.65rem;display:flex;align-items:center;gap:6px}
+.stitle-bar{width:3px;height:16px;background:#E8A000;border-radius:0;flex-shrink:0}
+
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:7px;margin-bottom:1rem}
+.cc{background:#fff;border:1px solid var(--b);border-radius:10px;padding:.7rem;display:flex;align-items:center;gap:8px;cursor:pointer;transition:all .12s}
+.cc:hover{border-color:#2C5F8A;background:#EFF6FF}
+.cc-icon{width:28px;height:28px;border-radius:6px;background:#EFF6FF;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cc-icon i{font-size:14px;color:#2C5F8A}
+.cc span{font-size:11px;font-weight:500;color:var(--t);line-height:1.3}
+
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:1rem}
+.sc{background:#fff;border:1.5px solid var(--b);border-radius:10px;padding:.9rem;cursor:pointer;transition:all .15s;position:relative;overflow:hidden}
+.sc::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:#E8A000;opacity:0;transition:opacity .15s}
+.sc.open:hover{border-color:#C4CDD6;transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.sc.open:hover::after,.sc.active::after{opacity:1}
+.sc.locked{opacity:.45;cursor:not-allowed}
+.sc.active{border-color:#2C5F8A}
+.snum{font-family:'Oswald',sans-serif;font-size:14px;font-weight:600;color:var(--t)}
+.sname{font-size:11px;color:var(--t2);margin-top:3px;line-height:1.3}
+.sbadge{position:absolute;top:7px;right:7px;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px}
+.sbadge.o{background:#DCFCE7;color:#15803D}.sbadge.l{background:#F3F4F6;color:#9CA3AF}
+.sbloc{font-size:10px;color:var(--t2);margin-top:6px;padding-top:6px;border-top:1px solid var(--b)}
+
+.panel{background:#fff;border:1px solid var(--b);border-radius:10px;padding:1rem;margin-bottom:1rem;display:none}
+.panel.vis{display:block}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.85rem;gap:8px}
+.ptitle{font-family:'Oswald',sans-serif;font-size:15px;font-weight:600;color:var(--t);line-height:1.3}
+.pobj{font-size:11px;color:var(--t2);margin-top:3px;line-height:1.4}
+.pclose{background:none;border:none;font-size:20px;color:var(--t2);cursor:pointer;flex-shrink:0}
+.rlist{display:flex;flex-direction:column;gap:6px}
+.rglbl{font-size:10px;font-weight:600;color:#2C5F8A;text-transform:uppercase;letter-spacing:.5px;margin:8px 0 4px}
+.rglbl:first-child{margin-top:0}
+.ri{display:flex;align-items:center;gap:9px;padding:9px 11px;background:#F9FAFB;border-radius:8px;border:1px solid var(--b);text-decoration:none;transition:all .12s}
+.ri:hover{background:#EFF6FF;border-color:#2C5F8A}
+.rico{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.rico.ppt{background:#EFF6FF;color:#2C5F8A}
+.rico.game{background:#DCFCE7;color:#15803D}
+.rico.quiz{background:#FEF3C7;color:#92400E}
+.rinfo{flex:1}.rn{font-size:12px;font-weight:500;color:var(--t)}.rt{font-size:10px;color:var(--t2)}
+.ctags{display:flex;flex-wrap:wrap;gap:4px;margin-top:.6rem}
+.ctag{font-size:10px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:4px;padding:2px 6px;color:#1D4ED8}
+
+/* ===== GLOSSAIRE ===== */
+.gcontent{padding:1.1rem;max-width:700px;margin:0 auto}
+.gsearch{width:100%;border:1.5px solid var(--b);border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Inter',sans-serif;background:#fff;color:var(--t);margin-bottom:1rem}
+.gsearch:focus{outline:none;border-color:#2C5F8A}
+.abar{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:1rem}
+.abtn{width:26px;height:26px;border-radius:5px;border:1px solid var(--b);background:#F9FAFB;font-size:11px;font-weight:600;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s}
+.abtn.has{background:#2C5F8A;color:#fff;border-color:#2C5F8A}
+.asec{margin-bottom:.75rem}
+.altr{font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;color:#2C5F8A;padding:4px 0;margin-bottom:6px;border-bottom:2px solid #2C5F8A}
+.gt{background:#fff;border:1px solid var(--b);border-radius:8px;margin-bottom:5px;overflow:hidden}
+.gth{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;cursor:pointer;transition:background .12s}
+.gth:hover,.gth.open{background:#EFF6FF}
+.gth.open{border-bottom:1px solid var(--b)}
+.gtn{font-size:12px;font-weight:600;color:var(--t)}
+.gta{font-size:11px;color:var(--t2);transition:transform .2s}.gta.open{transform:rotate(90deg)}
+.gtd{display:none;padding:10px 12px;font-size:12px;color:var(--t2);line-height:1.6;background:#F5F8FF}
+.gtd.vis{display:block}
+.nores{font-size:12px;color:var(--t2);text-align:center;padding:2rem 0}
+
+/* ===== ADMIN ===== */
+.atabs{display:flex;gap:0;margin-bottom:1.25rem;border-bottom:2px solid var(--b)}
+.atab{padding:8px 16px;font-size:13px;font-family:'Inter',sans-serif;border:none;background:none;color:var(--t2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s}
+.atab.sel{color:#2C5F8A;border-bottom-color:#2C5F8A;font-weight:600}
+.apanel{display:none}.apanel.vis{display:block}
+.ptabs{display:flex;gap:7px;margin-bottom:1rem;flex-wrap:wrap}
+.ptab{padding:5px 12px;border-radius:7px;font-size:12px;cursor:pointer;font-family:'Inter',sans-serif;border:1px solid var(--b);background:#F9FAFB;color:var(--t);transition:all .12s}
+.ptab.sel{background:#2C5F8A;color:#fff;border-color:#2C5F8A}
+.trow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--b)}
+.trow:last-child{border-bottom:none}
+.tl{font-size:12px;color:var(--t)}.ts2{font-size:10px;color:var(--t2);margin-top:2px}
+.tgl{position:relative;width:38px;height:21px;flex-shrink:0}
+.tgl input{opacity:0;width:0;height:0}
+.slt{position:absolute;inset:0;background:#E5E7EB;border-radius:21px;cursor:pointer;transition:.2s}
+.slt:before{content:'';position:absolute;width:15px;height:15px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+input:checked+.slt{background:#16A34A}
+input:checked+.slt:before{transform:translateX(17px)}
+.codebox{background:#F9FAFB;border:1px solid var(--b);border-radius:8px;padding:.75rem 1rem;margin-top:1rem}
+.codebox p{font-size:10px;color:var(--t2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.codegrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.codeitem div:first-child{font-size:10px;color:var(--t2)}
+.codeitem div:last-child{font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;color:var(--t);letter-spacing:3px}
+.elist{display:flex;flex-direction:column;gap:8px}
+.ecard{background:#F9FAFB;border:1px solid var(--b);border-radius:10px;overflow:hidden}
+.ehead{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;cursor:pointer;background:#fff}
+.ehl{display:flex;align-items:center;gap:8px}
+.enum{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;color:#2C5F8A;width:24px}
+.etitle{font-size:12px;font-weight:500;color:var(--t)}
+.earr{font-size:12px;color:var(--t2);transition:transform .2s}.earr.open{transform:rotate(90deg)}
+.ebody{display:none;padding:12px;border-top:1px solid var(--b)}.ebody.vis{display:block}
+.frow{margin-bottom:10px}
+.flbl{font-size:11px;color:var(--t2);margin-bottom:4px;font-weight:500}
+.fi{width:100%;border:1px solid var(--b);border-radius:7px;padding:8px 10px;font-size:12px;font-family:'Inter',sans-serif;background:#fff;color:var(--t);resize:vertical}
+.fi:focus{outline:none;border-color:#2C5F8A}
+.rerow{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.rerow input{flex:1;border:1px solid var(--b);border-radius:6px;padding:6px 8px;font-size:11px;font-family:'Inter',sans-serif;background:#fff;color:var(--t)}
+.rerow input:focus{outline:none;border-color:#2C5F8A}
+.bdel{background:#FEE2E2;border:1px solid #FECACA;border-radius:6px;padding:5px 8px;font-size:11px;color:#991B1B;cursor:pointer;flex-shrink:0}
+.badd{background:#F9FAFB;border:1px solid var(--b);border-radius:6px;padding:5px 10px;font-size:11px;color:var(--t2);cursor:pointer;margin-top:4px}
+.badd:hover{border-color:#2C5F8A;color:#2C5F8A}
+.bsave{background:#16A34A;border:none;border-radius:7px;padding:7px 14px;font-size:12px;font-family:'Oswald',sans-serif;color:#fff;cursor:pointer;margin-top:10px;font-weight:600}
+.saveok{font-size:11px;color:#16A34A;margin-left:8px;display:none}
+
+@media(max-width:480px){
+  .login-title{font-size:16px}
+  .pgrid{gap:7px}
+  .sgrid{grid-template-columns:1fr 1fr}
+  .cgrid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div id="SL" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:1.5rem;position:relative;overflow:hidden;background:linear-gradient(rgba(220,228,235,0.6),rgba(220,228,235,0.6))">
+
+  <!-- Fond SVG chantier -->
+  <svg class="hero-svg" viewBox="0 0 700 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <rect width="700" height="700" fill="#CDD5DC"/>
+    <rect width="700" height="280" fill="#D8E4EE" opacity=".9"/>
+    <!-- Bâtiment béton droite -->
+    <rect x="400" y="20" width="300" height="520" fill="#C2CDD6" rx="2"/>
+    <rect x="415" y="38" width="270" height="485" fill="#CBD5DE" rx="1"/>
+    <!-- Fenêtres -->
+    <rect x="430" y="55" width="58" height="72" fill="#A8BCC8" rx="2" opacity=".8"/>
+    <rect x="503" y="55" width="58" height="72" fill="#A8BCC8" rx="2" opacity=".8"/>
+    <rect x="576" y="55" width="72" height="72" fill="#A8BCC8" rx="2" opacity=".8"/>
+    <rect x="430" y="148" width="58" height="72" fill="#A8BCC8" rx="2" opacity=".8"/>
+    <rect x="503" y="148" width="58" height="72" fill="#A8BCC8" rx="2" opacity=".8"/>
+    <rect x="576" y="148" width="72" height="72" fill="#A8BCC8" rx="2" opacity=".8"/>
+    <rect x="430" y="241" width="58" height="72" fill="#A8BCC8" rx="2" opacity=".8"/>
+    <rect x="503" y="241" width="58" height="72" fill="#A8BCC8" rx="2" opacity=".8"/>
+    <rect x="576" y="241" width="72" height="72" fill="#A8BCC8" rx="2" opacity=".8"/>
+    <rect x="430" y="334" width="58" height="72" fill="#A8BCC8" rx="2" opacity=".8"/>
+    <rect x="503" y="334" width="58" height="72" fill="#A8BCC8" rx="2" opacity=".8"/>
+    <!-- Dalles -->
+    <rect x="400" y="145" width="300" height="4" fill="#B0BDC8" opacity=".7"/>
+    <rect x="400" y="238" width="300" height="4" fill="#B0BDC8" opacity=".7"/>
+    <rect x="400" y="331" width="300" height="4" fill="#B0BDC8" opacity=".7"/>
+    <rect x="400" y="424" width="300" height="4" fill="#B0BDC8" opacity=".7"/>
+    <!-- Colonnes -->
+    <rect x="415" y="20" width="8" height="520" fill="#B0BDC8" opacity=".5"/>
+    <rect x="490" y="20" width="6" height="520" fill="#B0BDC8" opacity=".5"/>
+    <rect x="563" y="20" width="6" height="520" fill="#B0BDC8" opacity=".5"/>
+    <rect x="636" y="20" width="6" height="520" fill="#B0BDC8" opacity=".5"/>
+    <!-- Mur brique gauche -->
+    <rect x="0" y="290" width="190" height="410" fill="#C8B89A" opacity=".45"/>
+    <rect x="0" y="300" width="52" height="17" fill="#C2A882" rx="1" opacity=".5"/>
+    <rect x="57" y="300" width="52" height="17" fill="#C8AE88" rx="1" opacity=".5"/>
+    <rect x="114" y="300" width="52" height="17" fill="#C2A882" rx="1" opacity=".5"/>
+    <rect x="25" y="322" width="52" height="17" fill="#C8AE88" rx="1" opacity=".5"/>
+    <rect x="82" y="322" width="52" height="17" fill="#C2A882" rx="1" opacity=".5"/>
+    <rect x="139" y="322" width="51" height="17" fill="#C8AE88" rx="1" opacity=".5"/>
+    <rect x="0" y="344" width="52" height="17" fill="#C2A882" rx="1" opacity=".5"/>
+    <rect x="57" y="344" width="52" height="17" fill="#C8AE88" rx="1" opacity=".5"/>
+    <rect x="114" y="344" width="52" height="17" fill="#C2A882" rx="1" opacity=".5"/>
+    <rect x="25" y="366" width="52" height="17" fill="#C8AE88" rx="1" opacity=".5"/>
+    <rect x="82" y="366" width="52" height="17" fill="#C2A882" rx="1" opacity=".5"/>
+    <rect x="139" y="366" width="51" height="17" fill="#C8AE88" rx="1" opacity=".5"/>
+    <rect x="0" y="388" width="52" height="17" fill="#C2A882" rx="1" opacity=".5"/>
+    <rect x="57" y="388" width="52" height="17" fill="#C8AE88" rx="1" opacity=".5"/>
+    <rect x="114" y="388" width="52" height="17" fill="#C2A882" rx="1" opacity=".5"/>
+    <!-- Sol -->
+    <rect x="0" y="560" width="700" height="140" fill="#B8C4CC"/>
+    <rect x="0" y="558" width="700" height="4" fill="#A8B5BF"/>
+    <!-- Ouvrier 1 -->
+    <ellipse cx="610" cy="558" rx="15" ry="15" fill="#8A9BA8" opacity=".6"/>
+    <rect x="598" y="573" width="24" height="48" fill="#7A8E9C" rx="3" opacity=".6"/>
+    <rect x="595" y="579" width="10" height="33" fill="#7A8E9C" rx="2" opacity=".6"/>
+    <rect x="613" y="579" width="10" height="33" fill="#7A8E9C" rx="2" opacity=".6"/>
+    <rect x="598" y="621" width="10" height="28" fill="#6A7E8C" rx="2" opacity=".6"/>
+    <rect x="612" y="621" width="10" height="28" fill="#6A7E8C" rx="2" opacity=".6"/>
+    <ellipse cx="610" cy="547" rx="17" ry="9" fill="#D4B800" opacity=".7"/>
+    <!-- Ouvrier 2 -->
+    <ellipse cx="650" cy="552" rx="13" ry="13" fill="#8A9BA8" opacity=".5"/>
+    <rect x="639" y="565" width="22" height="46" fill="#7A8E9C" rx="3" opacity=".5"/>
+    <rect x="636" y="572" width="9" height="30" fill="#7A8E9C" rx="2" opacity=".5"/>
+    <rect x="652" y="575" width="9" height="30" fill="#7A8E9C" rx="2" opacity=".5"/>
+    <rect x="639" y="611" width="9" height="26" fill="#6A7E8C" rx="2" opacity=".5"/>
+    <rect x="651" y="611" width="9" height="26" fill="#6A7E8C" rx="2" opacity=".5"/>
+    <ellipse cx="650" cy="542" rx="15" ry="8" fill="#D4B800" opacity=".6"/>
+    <!-- Documents entre ouvriers -->
+    <rect x="618" y="578" width="23" height="17" fill="#E8EEF2" rx="2" opacity=".7"/>
+  </svg>
+
+  <div class="login-wrap">
+    <!-- Logo au dessus de la carte -->
+    <div class="login-logo-above">
+      <div class="login-logo-circle">
+        <svg width="40" height="22" viewBox="0 0 40 22" fill="none">
+          <rect x="1" y="1" width="38" height="6" rx="1.5" fill="#0C2D4A"/>
+          <rect x="5" y="8.5" width="30" height="4" rx="1" fill="#0C2D4A"/>
+          <line x1="1" y1="14" x2="39" y2="14" stroke="#0C2D4A" stroke-width="1.8"/>
+          <line x1="6" y1="16" x2="14" y2="21" stroke="#0C2D4A" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="11" y1="16" x2="19" y2="21" stroke="#0C2D4A" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="16" y1="16" x2="24" y2="21" stroke="#0C2D4A" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="21" y1="16" x2="29" y2="21" stroke="#0C2D4A" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="26" y1="16" x2="34" y2="21" stroke="#0C2D4A" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <div class="logo-btp">BTP CFA</div>
+        <div class="logo-aube">AUBE</div>
+        <div class="logo-site">btpcfa-grandest.fr</div>
+      </div>
+    </div>
+
+    <!-- Carte blanche -->
+    <div class="login-card">
+      <div class="login-title">Espace Pédagogique — Espace Peinture</div>
+      <div class="login-sub">BTP CFA Grand Est — Ressources apprentis</div>
+
+      <div class="pgrid">
+        <button class="pb" onclick="selP('CAP1')" id="b-CAP1"><span class="pl">CAP 1</span><span class="ps">1ère année</span></button>
+        <button class="pb" onclick="selP('CAP2')" id="b-CAP2"><span class="pl">CAP 2</span><span class="ps">2ème année</span></button>
+        <button class="pb" onclick="selP('BP1')" id="b-BP1"><span class="pl">BP 1</span><span class="ps">1ère année</span></button>
+        <button class="pb" onclick="selP('BP2')" id="b-BP2"><span class="pl">BP 2</span><span class="ps">2ème année</span></button>
+      </div>
+
+      <div class="code-label">Code de classe</div>
+      <input class="code" type="text" id="ci" placeholder="••••••" oninput="document.getElementById('em').textContent='';chkA(this.value)">
+      <button class="btnp" onclick="doLogin()">Accéder à mes ressources</button>
+      <div class="err" id="em"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div id="SD">
+  <div class="topbar">
+    <div class="tbl">
+      <div class="tlogo-sm"><div class="tlogo-sm-btp">BTP CFA</div><div class="tlogo-sm-aube">AUBE</div></div>
+      <div><div class="ttitle">Espace Peinture</div><div class="tsub" id="dsub"></div></div>
+    </div>
+    <button class="bout" onclick="logout()">Déconnexion</button>
+  </div>
+  <div class="dash">
+    <div class="cbar">
+      <div class="cbar-lbl">Avancement de ta formation</div>
+      <div class="csteps" id="csteps"></div>
+      <div class="cbar-ft"><span id="cfl"></span><strong id="cfr"></strong></div>
+    </div>
+    <div class="stitle"><span class="stitle-bar"></span>Ressources communes</div>
+    <div class="cgrid">
+      <div class="cc"><div class="cc-icon"><i class="ti ti-shield-check"></i></div><span>Santé &amp; Sécurité</span></div>
+      <div class="cc" onclick="showCommune('dechets')"><div class="cc-icon"><i class="ti ti-recycle"></i></div><span>Déchets BTP</span></div>
+      <div class="cc"><div class="cc-icon"><i class="ti ti-leaf"></i></div><span>EDC &amp; Éco-gestes</span></div>
+      <div class="cc" onclick="showGlo()"><div class="cc-icon"><i class="ti ti-books"></i></div><span>Glossaire métier</span></div>
+      <div class="cc" onclick="showCommune('quiz')"><div class="cc-icon"><i class="ti ti-device-gamepad-2"></i></div><span>Tous les quiz</span></div>
+    </div>
+    <div class="stitle"><span class="stitle-bar"></span>Mes stages CFA</div>
+    <div class="sgrid" id="sgrid"></div>
+    <div class="panel" id="panel">
+      <div class="ph">
+        <div><div class="ptitle" id="ptitle"></div><div class="pobj" id="pobj"></div></div>
+        <button class="pclose" onclick="closeP()">×</button>
+      </div>
+      <div class="rlist" id="rlist"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE COMMUNE -->
+<div id="SC">
+  <div class="topbar">
+    <div class="tbl"><div class="tlogo-sm"><div class="tlogo-sm-btp">BTP CFA</div><div class="tlogo-sm-aube">AUBE</div></div><div><div class="ttitle" id="sc-title"></div><div class="tsub" id="sc-sub"></div></div></div>
+    <button class="bout" onclick="backD()">← Retour</button>
+  </div>
+  <div class="dash"><div class="rlist" id="sc-list"></div></div>
+</div>
+
+<!-- GLOSSAIRE -->
+<div id="SG">
+  <div class="topbar">
+    <div class="tbl"><div class="tlogo-sm"><div class="tlogo-sm-btp">BTP CFA</div><div class="tlogo-sm-aube">AUBE</div></div><div><div class="ttitle">Glossaire métier</div><div class="tsub" id="gsub"></div></div></div>
+    <button class="bout" onclick="backD()">← Retour</button>
+  </div>
+  <div class="gcontent">
+    <input class="gsearch" id="gs" placeholder="Rechercher un terme..." oninput="filterG(this.value)">
+    <div class="abar" id="abar"></div>
+    <div id="glist"></div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="SA">
+  <div class="topbar">
+    <div class="tbl"><div class="tlogo-sm"><div class="tlogo-sm-btp">BTP CFA</div><div class="tlogo-sm-aube">AUBE</div></div><div><div class="ttitle">Espace formateur</div><div class="tsub">BABAT</div></div></div>
+    <button class="bout" onclick="logout()">Quitter</button>
+  </div>
+  <div class="dash">
+    <div class="atabs">
+      <button class="atab sel" onclick="swA('unlock',this)">🔓 Déverrouillage</button>
+      <button class="atab" onclick="swA('edit',this)">✏️ Modifier le contenu</button>
+    </div>
+    <div class="apanel vis" id="ap-unlock">
+      <div class="ptabs" id="ptabs"></div>
+      <div id="ptoggles"></div>
+      <div class="codebox"><p>Codes d'accès des promos</p><div class="codegrid" id="codegrid"></div></div>
+    </div>
+    <div class="apanel" id="ap-edit">
+      <div class="ptabs" id="etabs"></div>
+      <div class="elist" id="elist"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DONNÉES — RESSOURCES COMMUNES
+// ============================================================
+const COMMUNES={
+  dechets:{title:'Déchets BTP',items:[
+    {type:'ppt',name:'Le traitement des déchets — Diaporama',url:'https://view.genially.com/64f6d487e9f79c0017bf4d6f'},
+    {type:'quiz',name:'Quiz — Le traitement des déchets',url:'https://view.genially.com/631af3efc41c420018ae52b5'}
+  ]},
+  quiz:{title:'Tous les quiz',items:[
+    {type:'quiz',name:"Quiz — L'outillage du peintre",url:'https://view.genially.com/63248307040209001100ab0a'},
+    {type:'quiz',name:'Quiz — Le traitement des déchets',url:'https://view.genially.com/631af3efc41c420018ae52b5'},
+    {type:'quiz',name:'Quiz — Les différents subjectiles',url:'https://view.genially.com/63217c3918827800110d0273'},
+    {type:'quiz',name:'Quiz — Traiter une fissure',url:'https://view.genially.com/63330c9ccf5a7e0011373f26'},
+    {type:'quiz',name:'Quiz — Les composants de la peinture',url:'https://view.genially.com/6335853e3e14570018fd0244'},
+    {type:'quiz',name:'Quiz — Les bois et dérivés',url:'https://view.genially.com/636cafddbe53850019fc4318'},
+    {type:'quiz',name:'Quiz — Mode opératoire revêtement',url:'https://view.genially.com/613073bf12560a0dd5f769d9'},
+    {type:'quiz',name:'Digital Basic Quiz',url:'https://view.genially.com/6364e6a07edf22001a87997c'}
+  ]}
+};
+
+// ============================================================
+// GLOSSAIRE
+// ============================================================
+const GL=[
+  {t:"Alcalin",d:"Propriété chimique s'opposant à la notion d'acide. Les produits alcalins attaquent la peau, les huiles, l'aluminium, le zinc. Supports alcalins les plus courants : ciments, chaux et produits qui en contiennent."},
+  {t:"Aspect brillant",d:"Très réfléchissant, met en valeur les couleurs mais souligne les défauts du support."},
+  {t:"Aspect mat",d:"Ne réfléchit pas la lumière, dissimule les imperfections du support mais est généralement plus fragile."},
+  {t:"Aspect satiné",d:"Finition intermédiaire, légèrement réfléchissante, facile à nettoyer et polyvalente."},
+  {t:"Aspect velours",d:"Aspect doux, très légèrement satiné, qui cache mieux les défauts du support que le satiné classique."},
+  {t:"Aubier",d:"Partie périphérique, jeune, vivante et de teinte claire du bois des arbres (par opposition au cœur)."},
+  {t:"Béton banché",d:"Mélange de ciment, de sable et d'adjuvant mis en œuvre entre des banches de coffrage, permettant d'épouser différentes formes."},
+  {t:"Béton cellulaire",d:"Combinaison d'eau, de sable, de ciment, de poudre ou pâte d'aluminium et d'air."},
+  {t:"Calicot",d:"Bande de tissu placée sur une fissure après rebouchage et avant enduisage pour éviter la réapparition de fissures."},
+  {t:"Cambium",d:"Couche cellulaire cylindrique dans les tiges et racines des plantes vivaces qui assure la croissance en épaisseur."},
+  {t:"Carreaux de plâtre",d:"Blocs de plâtre préfabriqués et calibrés pour monter des cloisons de distribution par emboîtement."},
+  {t:"Charge",d:"Matières minérales inertes ajoutées pour donner du corps à la peinture, améliorer sa dureté ou réduire son coût."},
+  {t:"Classement UPEC",d:"Norme de classification des revêtements de sol. U = Usure, P = Poinçonnement, E = Eau, C = Chimique. Chaque lettre est notée de 1 (faible) à 4 (très élevé)."},
+  {t:"COV",d:"Composés Organiques Volatils. Substances chimiques dans certaines peintures qui s'évaporent à température ambiante, nocives pour la santé et l'environnement."},
+  {t:"CSTB",d:"Centre Scientifique et Technique du Bâtiment. Organisme public de référence pour la recherche, l'expertise et la certification dans le bâtiment."},
+  {t:"Couleurs chaudes",d:"Tons vifs (rouge, jaune, orange) — couleurs gaies qui incitent à l'activité physique."},
+  {t:"Couleurs froides",d:"Jaune-vert, vert, bleu, violet — couleurs reposantes qui ont tendance à calmer."},
+  {t:"Couleurs primaires",d:"Trois couleurs pures non obtenables par mélange. En peinture : jaune, cyan (bleu) et magenta (rouge)."},
+  {t:"Couleurs secondaires",d:"Obtenues en mélangeant deux couleurs primaires. Orange = Jaune + Magenta / Vert = Jaune + Cyan / Violet = Cyan + Magenta."},
+  {t:"Déchet ultime",d:"Déchets qui ne sont plus valorisables, réglementairement les seuls à pouvoir être stockés dans un C.S.D.U."},
+  {t:"DTU",d:"Documents Techniques Unifiés. Règles de l'art pour les travaux de bâtiment. DTU 59.1 : peintures / DTU 59.4 : revêtements muraux / DTU 42.1 : façades / DTU 53.2 : revêtements de sol."},
+  {t:"Duramen",d:"Partie centrale du tronc (bois parfait ou cœur). Zone la plus dense, la plus sombre et la plus résistante du bois."},
+  {t:"Ébauche",d:"Première couche d'enduit en forte épaisseur pour combler les manques importants et dresser grossièrement le support."},
+  {t:"Efflorescence",d:"Dépôt blanc poudreux à la surface des murs en ciment, chaux, briques ou béton, formé par la remontée d'eau chargée en sels minéraux."},
+  {t:"Enduit allégé",d:"Formulé avec des charges légères pour une application en forte épaisseur sans risque de fissuration par retrait."},
+  {t:"Enduit de dégrossissage",d:"Appliqué sur les supports bruts ou irréguliers pour dresser et niveler le mur avant la finition."},
+  {t:"Enduit de lissage",d:"Enduit fin appliqué en couche mince pour obtenir un support parfaitement lisse avant la mise en peinture."},
+  {t:"Enduit de rebouchage",d:"Enduit garnissant pour combler les trous et fissures profonds. Se rétracte peu au séchage."},
+  {t:"Enduit gras",d:"Contient des liants oléo-synthétiques, offrant une meilleure adhérence et une finition plus souple."},
+  {t:"Enduisage de dégrossissage",d:"Travail consistant à niveler un support irrégulier pour le rendre plan avant l'application des finitions."},
+  {t:"Enduisage non repassé",d:"L'enduit est laissé brut après application, sans retouche ni ponçage. Pour des finitions rustiques ou des sous-couches."},
+  {t:"Enduisage repassé",d:"Application d'une seconde couche d'enduit sur la première après séchage pour supprimer les traces de passes."},
+  {t:"Exotiques (bois)",d:"Bois de zones tropicales ou équatoriales (teck, iroko, acajou). Grande densité et résistance naturelle à l'humidité et aux insectes."},
+  {t:"Faïençage",d:"Ensemble de fissures inférieures à 0,2 mm de large."},
+  {t:"Farinage",d:"Apparition d'une poudre fine de faible adhérence à la surface d'un feuil de peinture."},
+  {t:"Feuille de peinture",d:"Couche solide et continue de matière qui reste sur le support une fois les solvants évaporés."},
+  {t:"Feuillus",d:"Bois issus d'arbres à feuilles larges (chêne, hêtre, peuplier). Grande variété de duretés et de textures."},
+  {t:"Fissures fines",d:"Fissures comprises entre 0,2 et 2 mm de large."},
+  {t:"Fissures mortes",d:"Fissures dont l'état est stabilisé."},
+  {t:"Fissures vivantes",d:"Fissures non stabilisées dont la largeur évolue dans le temps."},
+  {t:"Fissure de retrait",d:"Fissure non stabilisée entre deux matériaux différents (ex : entre un mur et un bâti de porte ou fenêtre)."},
+  {t:"Hors poussière",d:"Temps nécessaire pour que la surface ne retienne plus les poussières en suspension dans l'air."},
+  {t:"Hygrométrie",d:"Mesure du taux d'humidité présent dans l'air ou dans un matériau. Essentielle pour vérifier si un support est assez sec pour être peint."},
+  {t:"Hydrométrie",d:"Discipline scientifique mesurant les caractéristiques des eaux courantes (débit, vitesse, niveau)."},
+  {t:"Imputrescible",d:"Qualifie un matériau résistant naturellement ou par traitement à la décomposition biologique."},
+  {t:"Incombustible",d:"Qualifie un matériau qui ne peut ni s'enflammer ni contribuer à la propagation d'un incendie."},
+  {t:"Insectes xylophages",d:"Organismes qui se nourrissent de bois et creusent des galeries à l'intérieur du matériau, fragilisant sa structure."},
+  {t:"Lasures",d:"Produits transparents ou semi-transparents, microporeux et hydrofuges. Laissent respirer le bois, protègent contre UV, insectes et moisissures."},
+  {t:"Lézarde",d:"Fissure supérieure à 2 mm de large. Peut porter atteinte à la solidité du bâtiment."},
+  {t:"Liants",d:"Résines ou huiles qui agglomèrent les pigments entre eux et assurent l'adhérence de la peinture sur le support après séchage."},
+  {t:"Liant hydraulique",d:"Liant minéral à prise et durcissement irréversibles en présence d'eau. Ex. : ciment, chaux hydraulique, plâtre."},
+  {t:"Liber",d:"Tissu végétal assurant la conduction de la sève."},
+  {t:"Métaux ferreux",d:"Alliages composés majoritairement de fer (acier, fonte). Sensibles à la corrosion (rouille) sans protection."},
+  {t:"Métaux non ferreux",d:"Métaux sans fer significatif (aluminium, cuivre, zinc, plomb). Plus résistants à la corrosion atmosphérique."},
+  {t:"Mortier de ciment",d:"Mélange d'un liant et d'agrégats avec de l'eau. Utilisé en maçonnerie comme élément de liaison, de scellement ou comme enduit."},
+  {t:"Mortier de plâtre et chaux",d:"Utilisé en enduit extérieur sur de nombreuses façades parisiennes."},
+  {t:"Peintures d'imperméabilité",d:"Résistance au passage de l'eau de pluie. Quatre classes : I1, I2, I3, I4."},
+  {t:"Peintures microporeuses",d:"Film opaque perméable à la vapeur d'eau. Laissent respirer le bois. Toutes les couches doivent être microporeuses."},
+  {t:"Peintures non microporeuses",d:"Ne laissent pas respirer le bois. Une reprise d'humidité peut provoquer le décollement."},
+  {t:"Phase aqueuse",d:"Peinture dont le solvant principal est l'eau. Nettoyage des outils à l'eau."},
+  {t:"Phase solvant",d:"Peinture dont le solvant est un produit organique (white-spirit). Nettoyage avec un solvant spécifique."},
+  {t:"Phelloderme",d:"Tissu engendré par l'assise génératrice corticale, qui produit à l'extérieur le liège."},
+  {t:"Pigments",d:"Poudres fines insolubles qui donnent à la peinture sa couleur, son opacité et ses propriétés protectrices."},
+  {t:"Plaque de plâtre",d:"Panneau d'âme en plâtre prise entre deux feuilles de carton. Utilisé pour cloisons, doublages et faux-plafonds."},
+  {t:"Plâtre coupé",d:"Plâtre additionné d'une charge pour ralentir la prise et faciliter le travail."},
+  {t:"Plâtre lissé",d:"Finition obtenue en resserrant le plâtre frais avec une lisseuse ou un platoir métallique."},
+  {t:"Poreux",d:"Matériaux composés de minuscules anfractuosités dans lesquels l'eau peut s'infiltrer (béton, brique, ciment, bois)."},
+  {t:"Pulvérulence",d:"Aspect poudreux en surface d'un support. Le matériau se désagrège en fine poussière au frottement."},
+  {t:"Ragréage",d:"Enduit de finition pour sols appliqué sur chapes, dalles, planchers et carrelages pour obtenir une surface plane et lisse."},
+  {t:"Ratissage",d:"Application d'une très fine couche d'enduit sur toute la surface pour masquer les petites imperfections."},
+  {t:"Récupération",d:"Collecte, démontage ou démolition puis séparation et conditionnement de certains déchets en vue d'une valorisation."},
+  {t:"Recyclage",d:"Ensemble de techniques pour récupérer des déchets et les réintroduire dans le cycle de production."},
+  {t:"Redoublement",d:"Temps minimal à respecter avant d'appliquer la couche suivante."},
+  {t:"Réemploi",d:"Nouvelle utilisation d'un déchet sans modification de son usage initial."},
+  {t:"Rendement",d:"Surface (en m²) qu'un litre de peinture permet de couvrir pour une couche donnée."},
+  {t:"Résineux",d:"Bois issus d'arbres à feuilles persistantes en aiguilles (sapin, pin, épicéa). Généralement plus tendres et contiennent de la résine."},
+  {t:"Sec à cœur",d:"Temps nécessaire pour que la peinture atteigne ses propriétés mécaniques et de dureté maximales."},
+  {t:"Sec au toucher",d:"Temps après lequel on peut effleurer la surface sans laisser de trace."},
+  {t:"Solvants",d:"Liquides utilisés pour fluidifier la peinture et faciliter son application. S'évaporent au séchage."},
+  {t:"Staff",d:"Plâtre de moulage armé de fibres pour créer des éléments décoratifs moulés (corniches, rosaces, colonnes)."},
+  {t:"Subjectile",d:"Surface externe de tout matériau que le peintre doit revêtir d'enduit, de peinture, de vernis ou d'une préparation similaire."},
+  {t:"Temps de gommage",d:"Période au cours de laquelle l'eau s'évapore et la colle acquiert une cohésion suffisante pour afficher le revêtement."},
+  {t:"Thixotropique",d:"Produit épais et gélifié au repos qui devient fluide lorsqu'on le travaille à la brosse ou au rouleau. Évite les coulures."},
+  {t:"Valorisation",d:"Procédé regroupant recyclage, récupération et réemploi."},
+  {t:"Vernis",d:"Transparents, forment un film épais qui ne laisse pas respirer le bois. Demandent une rénovation importante."}
+].sort((a,b)=>a.t.localeCompare(b.t,'fr'));
+
+// ============================================================
+// PROMOTIONS ET STAGES
+// ============================================================
+const PR={
+  CAP1:{label:'CAP 1ère année',code:'CAP101',unlocked:4,stages:[
+    {title:'Outillage du peintre',obj:'Nommer, décoder la fonction et ranger chaque outil avec le vocabulaire technique correct.',comp:'C2.2, C2.3 — T6',bloc:'Technologie',res:[
+      {type:'ppt',name:"L'outillage du peintre",url:'https://view.genially.com/632428d1bd261800180f96aa'},
+      {type:'quiz',name:"Quiz — L'outillage du peintre",url:'https://view.genially.com/63248307040209001100ab0a'}
+    ]},
+    {title:'Déchets de chantier',obj:'Analyser la nature du déchet, appliquer le tri sélectif et adopter une attitude éco-citoyenne.',comp:'C3.1 à C4.3 — S2 — T9, T16',bloc:'Technologie',res:[
+      {type:'ppt',name:'Le traitement des déchets',url:'https://view.genially.com/64f6d487e9f79c0017bf4d6f'},
+      {type:'quiz',name:'Quiz — Le traitement des déchets',url:'https://view.genially.com/631af3efc41c420018ae52b5'}
+    ]},
+    {title:'Subjectiles & préparation',obj:"Reconnaître la nature du support, évaluer l'état de surface et vérifier la compatibilité.",comp:'C2, C3.1, C4.1 — S9, S11 — T1, T4, T8',bloc:'Bloc 1 — Travaux de peinture',res:[
+      {type:'ppt',name:'Les subjectiles',url:'https://view.genially.com/6322e2b5b1ca270011739feb'},
+      {type:'quiz',name:'Quiz — Les différents subjectiles',url:'https://view.genially.com/63217c3918827800110d0273'}
+    ]},
+    {title:'Fissures & apprêts',obj:'Caractériser les fissures. Réaliser un enduit repassé et appliquer une impression.',comp:'C3.5.1, C3.5.2 — S9, S10, S11 — T8, T11, T12',bloc:'Bloc 1 — Travaux de peinture',res:[
+      {type:'ppt',name:'Traiter une fissure',url:'https://view.genially.com/5c10d736363ee256b581b5da'},
+      {type:'ppt',name:'Enduire',url:'https://view.genially.com/5fa10af98519011e966a833b'},
+      {type:'quiz',name:'Quiz — Traiter une fissure',url:'https://view.genially.com/63330c9ccf5a7e0011373f26'}
+    ]},
+    {title:'Enduisage & impression',obj:'Classifier les enduits et choisir la sous-couche adaptée au support.',comp:'C3.5.2 — S9, S10 — T12, T13',bloc:'Bloc 1 — Travaux de peinture',res:[
+      {type:'ppt',name:'Choisir une impression',url:'https://view.genially.com/674596e422d2f81673a68ab8'}
+    ]},
+    {title:'Composants de la peinture',obj:'Distinguer le rôle du liant, du solvant, des pigments et des adjuvants.',comp:'S10 — T7',bloc:'Bloc 1 — Travaux de peinture',res:[
+      {type:'ppt',name:"Les différents composants d'une peinture",url:'https://view.genially.com/5df34c94a088af0ef3820943'},
+      {type:'quiz',name:'Quiz — Les composants de la peinture',url:'https://view.genially.com/6335853e3e14570018fd0244'}
+    ]},
+    {title:'Liants hydrauliques & DTU',obj:'Comprendre les NF DTU 59.1 et anticiper les désordres sur supports hydrauliques.',comp:'C2.1, C3.1, C3.8, C4.1 à C4.3 — S3.1 à S3.5, S8, S9',bloc:'Bloc 1 — Travaux de peinture',res:[
+      {type:'ppt',name:'Les liants hydrauliques',url:'https://view.genially.com/5cb243281016110f4e72eecb'}
+    ]},
+    {title:'Quantifier une peinture',obj:'Décoder une fiche technique, relever les mesures et calculer les quantités.',comp:'C1.1, C2.1, C2.3 — S5, S9 — T1, T4, T7',bloc:'Bloc 2 — Revêtements muraux',res:[
+      {type:'ppt',name:'Quantifier une peinture',url:'https://view.genially.com/5cebde74b4b98a0f5990c644'}
+    ]},
+    {title:'SST',obj:'Identifier les acteurs de prévention et maîtriser les gestes de premiers secours.',comp:'Sécurité — prérequis examens',bloc:'Sécurité',res:[]},
+    {title:'Plâtre et dérivés',obj:'Comprendre la fabrication du plâtre et les modes opératoires pour peintures sur plâtre neuf.',comp:'S2, S3.1, S5.1, S9 — T7, T8, T11 à T13',bloc:'Bloc 2 — Revêtements muraux',res:[
+      {type:'ppt',name:'Les plâtres et dérivés',url:'https://view.genially.com/5e1850f53cf83c241e146679'}
+    ]},
+    {title:'Supports bois et dérivés',obj:'Distinguer bois massifs et dérivés. Maîtriser les modes opératoires selon NF DTU 59.1.',comp:'S2, S3.1, S5.1, S9 — T7, T8, T11 à T13',bloc:'Bloc 2 — Revêtements muraux',res:[
+      {type:'ppt',name:'Les supports bois',url:'https://view.genially.com/605b09ac61383f0d06747dac'},
+      {type:'quiz',name:'Quiz — Les bois et dérivés',url:'https://view.genially.com/636cafddbe53850019fc4318'}
+    ]},
+    {title:'Signalétique & papier peint uni',obj:'Décoder les symboles des étiquettes de rouleaux. Poser un papier peint uni.',comp:'C1.1, C2.1, C2.3, C3.7 — S5, S9 — T13, T14',bloc:'Bloc 2 — Revêtements muraux',res:[
+      {type:'ppt',name:'La signalétique des revêtements',url:'https://view.genially.com/5cf8d0c47bace00f2c4dfff7'},
+      {type:'quiz',name:'Quiz — Mode opératoire revêtement',url:'https://view.genially.com/613073bf12560a0dd5f769d9'}
+    ]},
+    {title:'Quantifier un revêtement mural',obj:'Calculer le nombre de rouleaux en tenant compte des raccords.',comp:'C1.1, C2.1, C2.3 — S5, S9 — T13, T14',bloc:'Bloc 2 — Revêtements muraux',res:[
+      {type:'ppt',name:'Quantifier un revêtement mural',url:'https://view.genially.com/5cd95a0654bdc10f6b01223c'}
+    ]}
+  ]},
+  CAP2:{label:'CAP 2ème année',code:'CAP202',unlocked:2,stages:[
+    {title:'Métrés complexes',obj:'Maîtriser les quantitatifs, lecture de plan, peinture et revêtements muraux.',comp:'C1.1, C2.1, C2.3 — S5, S9',bloc:'Technologie',res:[
+      {type:'ppt',name:'Quantifier une peinture',url:'https://view.genially.com/5cebde74b4b98a0f5990c644'},
+      {type:'ppt',name:'Quantifier un revêtement mural',url:'https://view.genially.com/5cd95a0654bdc10f6b01223c'}
+    ]},
+    {title:'UPEC & ragréages',obj:'Comprendre le classement UPEC. Différencier ragréage autolissant et autonivelant.',comp:'C3.7 — S9 — T17 à T19',bloc:'Bloc 3 — Revêtements de sol',res:[
+      {type:'ppt',name:'Classement UPEC',url:'https://view.genially.com/5d63a7325e15e10f8e8bda2e'},
+      {type:'ppt',name:'Les ragréages',url:'https://view.genially.com/6629103e4985d500152b9eca'}
+    ]},
+    {title:'Implantation sol & encollage',obj:'Tracer les axes de départ, calculer la surface nette. Appliquer la colle et poser le revêtement.',comp:'C3.7, S10.6, S10.9 — T17 à T19',bloc:'Bloc 3 — Revêtements de sol',res:[
+      {type:'ppt',name:'Implantation sol',url:'https://view.genially.com/5d64e92e2dbc720f48b0746b'},
+      {type:'ppt',name:'Encoller un revêtement de sol',url:'https://view.genially.com/5f801ff1bd1ae60d06ee1acd'}
+    ]},
+    {title:'Sol souple & R408',obj:'Poser des dalles ou lames PVC/Vinyle. Habilitation R408 travail en hauteur.',comp:'C3.4, C3.7, S10.6, S10.9, S11.3',bloc:'Bloc 3 — Sécurité',res:[
+      {type:'ppt',name:'Travail en hauteur R408',url:'https://view.genially.com/654c9d08b07ead0012296d99'}
+    ]},
+    {title:'Quantitatif multi-supports',obj:'Calculer pour les murs, le plafond et le sol les quantités de matériaux.',comp:'C3.7, S10.6, S10.9 — T17 à T19',bloc:'Bloc 3 — Revêtements de sol',res:[]},
+    {title:'Façades & ravalements',obj:'Identifier les classes de finition NF DTU 42.1. Comprendre les systèmes de ravalement.',comp:'C3.8 — S9, S10',bloc:'Bloc 1 — Travaux de peinture',res:[
+      {type:'ppt',name:'Les ravalements de façades',url:'https://view.genially.com/5e709eea4b44a00fb79f358d'}
+    ]},
+    {title:'Étude technique & besoins',obj:'Étude technique complète, métré et évaluation des besoins en peinture.',comp:'C1.1, C2.1, C2.3 — S5, S9',bloc:'Technologie',res:[
+      {type:'game',name:'Révision Expert Chantier',url:''}
+    ]},
+    {title:'CCF EP1',obj:'Épreuve CCF UP1 — Quantitatif',comp:'Évaluation certificative',bloc:'Évaluation',res:[]},
+    {title:'Métaux',obj:'Distinguer métaux ferreux et non-ferreux. Rôle du primaire. Préparation des surfaces.',comp:'C3.5 — S9, S11 — T13',bloc:'Bloc 1 — Travaux de peinture',res:[
+      {type:'ppt',name:'Les métaux',url:'https://view.genially.com/6377562e5bb0260019382697'}
+    ]},
+    {title:'Préparation CCF',obj:'Préparer le support avant CCF UP2 et UP3.',comp:'C3.5 — S9, S11 — T13',bloc:'Évaluation',res:[]},
+    {title:'CCF UP2',obj:'Épreuve CCF UP2',comp:'Évaluation certificative',bloc:'Évaluation',res:[]},
+    {title:"CCF UP3 & Chef d'œuvre",obj:"Épreuve CCF UP3 + oral chef d'œuvre — ressources à venir.",comp:'Évaluation certificative',bloc:'Évaluation',res:[]}
+  ]},
+  BP1:{label:'BP 1ère année',code:'BP0101',unlocked:0,stages:[
+    {title:'Contenu à venir',obj:'Les stages BP seront renseignés prochainement.',comp:'',bloc:'',res:[]}
+  ]},
+  BP2:{label:'BP 2ème année',code:'BP0202',unlocked:0,stages:[
+    {title:'Contenu à venir',obj:'Les stages BP seront renseignés prochainement.',comp:'',bloc:'',res:[]}
+  ]}
+};
+
+// ============================================================
+// ÉTAT GLOBAL
+// ============================================================
+const AC='BABAT';
+let cp=null,cpk=null,cap='CAP1',cep='CAP1',oei=-1,ogi=-1;
+
+// ============================================================
+// LOGIN
+// ============================================================
+function chkA(v){if(v.toUpperCase()===AC)showA();}
+function selP(k){cp=k;document.querySelectorAll('.pb').forEach(b=>b.classList.remove('sel'));document.getElementById('b-'+k).classList.add('sel');}
+function doLogin(){
+  const c=document.getElementById('ci').value.trim().toUpperCase();
+  if(c===AC){showA();return;}
+  if(!cp){document.getElementById('em').textContent='Sélectionne ta promotion.';return;}
+  if(c!==PR[cp].code){document.getElementById('em').textContent='Code incorrect. Demande à ton formateur.';return;}
+  cpk=cp;showD(cp);
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function H(id){const el=document.getElementById(id);if(el)el.style.display='none';}
+function S(id){const el=document.getElementById(id);if(el)el.style.display='block';}
+function hideAll(){['SL','SD','SC','SG','SA'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});}
+function showD(k){const p=PR[k];hideAll();S('SD');document.getElementById('dsub').textContent=p.label;rCbar(p);rSgrid(k,p);closeP();}
+function backD(){hideAll();S('SD');}
+function showCommune(key){
+  const c=COMMUNES[key];hideAll();S('SC');
+  document.getElementById('sc-title').textContent=c.title;
+  document.getElementById('sc-sub').textContent=cpk?PR[cpk].label:'';
+  const list=document.getElementById('sc-list');list.innerHTML='';
+  c.items.forEach(r=>list.appendChild(mkR(r)));
+}
+function showGlo(){
+  hideAll();S('SG');
+  document.getElementById('gsub').textContent=cpk?PR[cpk].label:'';
+  document.getElementById('gs').value='';ogi=-1;rAbar(GL);rGlist(GL);
+}
+function showA(){hideAll();S('SA');rPtabs();rToggles();rCodes();rEtabs();rElist();}
+function logout(){
+  cp=null;cpk=null;
+  document.getElementById('ci').value='';
+  document.getElementById('em').textContent='';
+  document.querySelectorAll('.pb').forEach(b=>b.classList.remove('sel'));
+  hideAll();
+  document.getElementById('SL').style.display='flex';
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function rCbar(p){
+  const n=p.stages.length,u=p.unlocked;
+  const sc=document.getElementById('csteps');sc.innerHTML='';
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='cs'+(i<u?' done':(i===u?' cur':''));sc.appendChild(s);}
+  document.getElementById('cfl').textContent=u+' / '+n+' stages';
+  document.getElementById('cfr').textContent=u===n?'Formation complète':'En cours';
+}
+function rSgrid(k,p){
+  const g=document.getElementById('sgrid');g.innerHTML='';
+  const bc={'Bloc 1 — Travaux de peinture':'#EFF6FF','Bloc 2 — Revêtements muraux':'#F0FDF4','Bloc 3 — Revêtements de sol':'#FFFBEB','Technologie':'#F5F8FF','Sécurité':'#FFF1F1','Évaluation':'#F5F3FF'};
+  p.stages.forEach((s,i)=>{
+    const u=i<p.unlocked;
+    const c=document.createElement('div');c.className='sc '+(u?'open':'locked');
+    c.innerHTML=`<div class="sbadge ${u?'o':'l'}"><i class="ti ti-${u?'lock-open':'lock'}"></i></div><div class="snum">S${i+1}</div><div class="sname">${s.title}</div><div class="sbloc" style="background:${u&&bc[s.bloc]?bc[s.bloc]:'transparent'};border-radius:4px;padding:${u&&bc[s.bloc]?'2px 5px':'0'}">${u?(s.bloc||'Ressources'):'Bientôt disponible'}</div>`;
+    if(u)c.onclick=()=>openP(i,s);
+    g.appendChild(c);
+  });
+}
+function openP(i,s){
+  document.querySelectorAll('.sc').forEach((c,j)=>c.classList.toggle('active',j===i));
+  document.getElementById('ptitle').textContent='Stage '+(i+1)+' — '+s.title;
+  document.getElementById('pobj').textContent=s.obj;
+  const rl=document.getElementById('rlist');rl.innerHTML='';
+  if(s.comp){
+    const ct=document.createElement('div');ct.className='ctags';
+    s.comp.split(' — ').forEach(c=>{const t=document.createElement('span');t.className='ctag';t.textContent=c;ct.appendChild(t);});
+    rl.appendChild(ct);
+  }
+  if(!s.res||s.res.length===0){
+    const d=document.createElement('div');d.style.cssText='font-size:12px;color:#6B7280;padding:.5rem 0';
+    d.textContent='Ressources à venir.';rl.appendChild(d);
+  } else {
+    const cours=s.res.filter(r=>r.type!=='quiz');
+    const quiz=s.res.filter(r=>r.type==='quiz');
+    if(cours.length){const l=document.createElement('div');l.className='rglbl';l.textContent='Cours & ressources';rl.appendChild(l);cours.forEach(r=>rl.appendChild(mkR(r)));}
+    if(quiz.length){const l=document.createElement('div');l.className='rglbl';l.textContent='Quiz';rl.appendChild(l);quiz.forEach(r=>rl.appendChild(mkR(r)));}
+  }
+  document.getElementById('panel').classList.add('vis');
+}
+function mkR(r){
+  const icons={ppt:'ti-presentation',pdf:'ti-file-text',game:'ti-puzzle',quiz:'ti-help-circle'};
+  const labels={ppt:'Diaporama Genially',pdf:'Document PDF',game:'Jeu pédagogique',quiz:'Quiz interactif'};
+  const a=document.createElement(r.url?'a':'div');a.className='ri';
+  if(r.url){a.href=r.url;a.target='_blank';a.rel='noopener';}
+  a.innerHTML=`<div class="rico ${r.type}"><i class="ti ${icons[r.type]||'ti-file'}"></i></div><div class="rinfo"><div class="rn">${r.name}</div><div class="rt">${labels[r.type]||r.type}</div></div>${r.url?'<i class="ti ti-external-link" style="font-size:12px;color:#9CA3AF"></i>':''}`;
+  return a;
+}
+function closeP(){document.getElementById('panel').classList.remove('vis');document.querySelectorAll('.sc').forEach(c=>c.classList.remove('active'));}
+
+// ============================================================
+// GLOSSAIRE
+// ============================================================
+function rAbar(items){
+  const L=new Set(items.map(g=>g.t[0].toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')));
+  const bar=document.getElementById('abar');bar.innerHTML='';
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(l=>{
+    const b=document.createElement('button');b.className='abtn'+(L.has(l)?' has':'');b.textContent=l;
+    if(L.has(l))b.onclick=()=>{const el=document.getElementById('gs-'+l);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});};
+    bar.appendChild(b);
+  });
+}
+function rGlist(items){
+  const c=document.getElementById('glist');c.innerHTML='';
+  if(!items.length){c.innerHTML='<div class="nores">Aucun terme trouvé</div>';return;}
+  const grp={};
+  items.forEach(g=>{const l=g.t[0].toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');if(!grp[l])grp[l]=[];grp[l].push(g);});
+  Object.keys(grp).sort().forEach(l=>{
+    const sec=document.createElement('div');sec.className='asec';sec.id='gs-'+l;
+    const ltr=document.createElement('div');ltr.className='altr';ltr.textContent=l;sec.appendChild(ltr);
+    grp[l].forEach(g=>{
+      const idx=GL.indexOf(g);const isO=ogi===idx;
+      const t=document.createElement('div');t.className='gt';
+      t.innerHTML=`<div class="gth${isO?' open':''}" onclick="tglo(${idx})"><span class="gtn">${g.t}</span><span class="gta${isO?' open':''}">›</span></div><div class="gtd${isO?' vis':''}">${g.d}</div>`;
+      sec.appendChild(t);
+    });
+    c.appendChild(sec);
+  });
+}
+function tglo(idx){ogi=ogi===idx?-1:idx;rGlist(getCF());}
+function getCF(){const v=document.getElementById('gs').value.toLowerCase();return v?GL.filter(g=>g.t.toLowerCase().includes(v)||g.d.toLowerCase().includes(v)):GL;}
+function filterG(v){ogi=-1;const f=v?GL.filter(g=>g.t.toLowerCase().includes(v.toLowerCase())||g.d.toLowerCase().includes(v.toLowerCase())):GL;rAbar(f);rGlist(f);}
+
+// ============================================================
+// ADMIN
+// ============================================================
+function swA(id,btn){
+  document.querySelectorAll('.atab').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');
+  document.querySelectorAll('.apanel').forEach(p=>p.classList.remove('vis'));
+  document.getElementById('ap-'+id).classList.add('vis');
+}
+function rPtabs(){
+  const t=document.getElementById('ptabs');t.innerHTML='';
+  Object.keys(PR).forEach(k=>{const b=document.createElement('button');b.className='ptab'+(k===cap?' sel':'');b.textContent=k;b.onclick=()=>{cap=k;rPtabs();rToggles();};t.appendChild(b);});
+}
+function rToggles(){
+  const p=PR[cap],c=document.getElementById('ptoggles');c.innerHTML='';
+  const i=document.createElement('div');i.style.cssText='font-size:11px;color:#6B7280;margin-bottom:.75rem';
+  i.textContent=p.label+' — '+p.unlocked+' stage(s) déverrouillé(s)';c.appendChild(i);
+  p.stages.forEach((s,idx)=>{
+    const r=document.createElement('div');r.className='trow';
+    r.innerHTML=`<div><div class="tl">S${idx+1} — ${s.title}</div><div class="ts2">${s.bloc||''} · ${s.res?s.res.length:0} ressource(s)</div></div><label class="tgl"><input type="checkbox" ${idx<p.unlocked?'checked':''} onchange="togS('${cap}',${idx},this.checked)"><span class="slt"></span></label>`;
+    c.appendChild(r);
+  });
+}
+function togS(pk,idx,val){
+  const p=PR[pk];
+  p.unlocked=val?Math.max(p.unlocked,idx+1):Math.min(p.unlocked,idx);
+  rToggles();rPtabs();
+}
+function rCodes(){
+  const c=document.getElementById('codegrid');c.innerHTML='';
+  Object.entries(PR).forEach(([k,p])=>{
+    const d=document.createElement('div');d.className='codeitem';
+    d.innerHTML=`<div>${p.label}</div><div>${p.code}</div>`;c.appendChild(d);
+  });
+}
+function rEtabs(){
+  const t=document.getElementById('etabs');t.innerHTML='';
+  Object.keys(PR).forEach(k=>{const b=document.createElement('button');b.className='ptab'+(k===cep?' sel':'');b.textContent=k;b.onclick=()=>{cep=k;oei=-1;rEtabs();rElist();};t.appendChild(b);});
+}
+function rElist(){
+  const p=PR[cep];const el=document.getElementById('elist');el.innerHTML='';
+  p.stages.forEach((s,i)=>{
+    const isO=oei===i;const card=document.createElement('div');card.className='ecard';
+    card.innerHTML=`<div class="ehead" onclick="tei(${i})"><div class="ehl"><span class="enum">S${i+1}</span><span class="etitle">${s.title}</span></div><span class="earr${isO?' open':''}">›</span></div>
+    <div class="ebody${isO?' vis':''}" id="eb-${i}">
+      <div class="frow"><div class="flbl">Titre</div><input class="fi" id="et-${i}" value="${s.title}"></div>
+      <div class="frow"><div class="flbl">Objectifs</div><textarea class="fi" id="eo-${i}" rows="3">${s.obj}</textarea></div>
+      <div class="frow"><div class="flbl">Compétences</div><input class="fi" id="ec-${i}" value="${s.comp||''}"></div>
+      <div class="frow"><div class="flbl">Bloc</div><input class="fi" id="eb2-${i}" value="${s.bloc||''}"></div>
+      <div class="frow"><div class="flbl">Ressources</div>
+        <div id="er-${i}">${(s.res||[]).map((r,ri)=>`<div class="rerow" id="rr-${i}-${ri}"><input placeholder="Nom" value="${r.name}" id="rn-${i}-${ri}"><input placeholder="URL" value="${r.url||''}" id="ru-${i}-${ri}"><button class="bdel" onclick="dRes(${i},${ri})">✕</button></div>`).join('')}</div>
+        <button class="badd" onclick="aRes(${i})">+ Ajouter une ressource</button>
+      </div>
+      <button class="bsave" onclick="svS(${i})">✓ Enregistrer</button>
+      <span class="saveok" id="sok-${i}">Sauvegardé !</span>
+    </div>`;
+    el.appendChild(card);
+  });
+}
+function tei(i){oei=oei===i?-1:i;rElist();}
+function svS(i){
+  const s=PR[cep].stages[i];
+  s.title=document.getElementById(`et-${i}`).value;
+  s.obj=document.getElementById(`eo-${i}`).value;
+  s.comp=document.getElementById(`ec-${i}`).value;
+  s.bloc=document.getElementById(`eb2-${i}`).value;
+  const res=[];
+  document.getElementById(`er-${i}`).querySelectorAll('.rerow').forEach(row=>{
+    const id=row.id.replace('rr-','').split('-');const ri=id[1];
+    const n=document.getElementById(`rn-${i}-${ri}`).value;
+    const u=document.getElementById(`ru-${i}-${ri}`).value;
+    if(n)res.push({type:'ppt',name:n,url:u});
+  });
+  s.res=res;
+  const ok=document.getElementById(`sok-${i}`);ok.style.display='inline';
+  setTimeout(()=>{ok.style.display='none';rElist();},1500);
+}
+function aRes(i){const s=PR[cep].stages[i];if(!s.res)s.res=[];s.res.push({type:'ppt',name:'',url:''});oei=i;rElist();}
+function dRes(i,ri){PR[cep].stages[i].res.splice(ri,1);oei=i;rElist();}
+</script>
+</body>
+</html>
